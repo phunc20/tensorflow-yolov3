@@ -25,7 +25,11 @@ def convert_voc_annotation(data_path, data_type, anno_path, use_difficult_bbox=T
                 if (not use_difficult_bbox) and(int(difficult) == 1):
                     continue
                 bbox = obj.find('bndbox')
-                class_ind = classes.index(obj.find('name').text.lower().strip())
+                what = obj.find('name').text.lower().strip()
+                if what != "person":
+                    continue
+                #class_ind = classes.index(what)
+                class_ind = 0
                 xmin = bbox.find('xmin').text.strip()
                 xmax = bbox.find('xmax').text.strip()
                 ymin = bbox.find('ymin').text.strip()
